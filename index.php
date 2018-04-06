@@ -1,13 +1,15 @@
 <?php
 require_once 'core/init.php';
 
-$user = db::getInstance()->get('users', array('username', '=', 'alex'));
+$user = db::getInstance()->update('users', 3, array(
+  
+    'password' => 'newpassword',
+    'name' => 'dale scott'
+    
+));
 
-if($user->error()){
-  echo 'No user';
-}else {
-  echo 'ok';
-}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,7 +86,14 @@ if($user->error()){
       <div class="container">
         <ol class="breadcrumb">
           <li class="active">Dashboard</li>
-          
+            <li class="text-center text-success pull-right" style="font-weight: 700">
+  <?php
+              if (session::exists('success')) {
+
+                echo session::flash('success');
+              }
+?>
+            </li>
         </ol>
       </div>      
     </section>
